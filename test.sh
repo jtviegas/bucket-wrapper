@@ -1,10 +1,11 @@
 #!/bin/sh
 __r=0
-this_folder=$( cd $( dirname "${BASH_SOURCE[0]}" ) >/dev/null 2>&1 && pwd )
+this_folder="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 if [ -z $this_folder ]; then
     this_folder=$(dirname $(readlink -f $0))
 fi
 echo "this_folder: $this_folder"
+
 parent_folder=$(dirname $this_folder)
 
 # shellcheck disable=SC2006
@@ -43,7 +44,6 @@ __r=$?
 echo "...stopping db container..."
 docker stop $CONTAINER && docker rm $CONTAINER
 
-rm "${this_folder}"/aws.sh
 cd "${_pwd}"
 echo "...bucket-wrapper test done. [$__r]"
 
