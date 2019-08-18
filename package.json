@@ -1,0 +1,37 @@
+{
+  "name": "@jtviegas/bucket-wrapper",
+  "version": "0.0.1",
+  "description": "...it's exactly that, a wrapper for a bucket-like store",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.2.4"
+  },
+  "scripts": {
+    "test": "./test.sh",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtviegas/bucket-wrapper.git"
+  },
+  "keywords": [
+    "bucket",
+    "javascript"
+  ],
+  "author": "Joao Tiago Viegas <jtviegas.js@gmail.com>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/jtviegas/bucket-wrapper/issues"
+  },
+  "homepage": "https://github.com/jtviegas/bucket-wrapper#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.6",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.2.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.510.0",
+    "winston": "^3.2.1"
+  }
+}
