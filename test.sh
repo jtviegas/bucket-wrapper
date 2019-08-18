@@ -14,6 +14,8 @@ _pwd=`pwd`
 cd "$this_folder"
 
 pip3 --version
+python --version
+python3 --version
 
 curl -XGET https://raw.githubusercontent.com/jtviegas/script-utils/master/bash/aws.sh -o "${this_folder}"/aws.sh
 . "${this_folder}"/aws.sh
