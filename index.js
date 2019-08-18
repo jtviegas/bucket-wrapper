@@ -13,7 +13,10 @@ const bucketWrapper = (config) => {
     let s3;
     if( config.test && config.test.aws_s3_endpoint ) {
         logger.info("[bucketWrapper] using specific url: %s", config.test.aws_s3_endpoint);
-        s3 = new aws.S3({apiVersion: config.AWS_API_VERSION, endpoint: config.test.aws_s3_endpoint, region: config.AWS_REGION, s3ForcePathStyle: true});
+        s3 = new aws.S3({apiVersion: config.AWS_API_VERSION
+            , endpoint: config.test.aws_s3_endpoint
+            , region: config.AWS_REGION
+            , s3ForcePathStyle: true, accessKeyId: 'foo' , secretAccessKey: 'foo'});
     }
     else
         s3 = new aws.S3({apiVersion: config.AWS_API_VERSION});
