@@ -1,8 +1,8 @@
 #!/bin/sh
 
 this_folder="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-if [[ -z $this_folder ]]; then
-  this_folder=$(dirname $(readlink -f $0))
+if [ -z $this_folder ]; then
+    this_folder=$(dirname $(readlink -f $0))
 fi
 parent_folder=$(dirname $this_folder)
 
@@ -28,12 +28,12 @@ docker run --name $CONTAINER -d -e SERVICES=s3:5000 -e DEFAULT_REGION=eu-west-1 
 createBucket ${BUCKET} ${AWS_CONTAINER}
 __r=$?
 # shellcheck disable=SC2154
-if [[ ! "$__r" -eq "0" ]] ; then cd "${_pwd}" && exit 1; fi
+if [ ! "$__r" -eq "0" ] ; then cd "${_pwd}" && exit 1; fi
 
 debug "...adding folder $BUCKET_FOLDER to bucket ${BUCKET} ..."
 createFolderInBucket ${BUCKET} ${BUCKET_FOLDER} ${AWS_CONTAINER}
 __r=$?
-if [[ ! "$__r" -eq "0" ]] ; then cd "${_pwd}" && exit 1; fi
+if [ ! "$__r" -eq "0" ] ; then cd "${_pwd}" && exit 1; fi
 info "...added folder $BUCKET_FOLDER to bucket $BUCKET..."
 
 node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*
