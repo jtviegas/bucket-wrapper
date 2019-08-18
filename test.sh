@@ -20,6 +20,8 @@ python3 --version
 curl -XGET https://raw.githubusercontent.com/jtviegas/script-utils/master/bash/aws.sh -o "${this_folder}"/aws.sh
 . "${this_folder}"/aws.sh
 
+aws_init
+
 BUCKET="bucket-wrapper-test"
 BUCKET_FOLDER="test"
 AWS_CONTAINER="http://localhost:5000"
