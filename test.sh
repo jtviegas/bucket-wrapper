@@ -13,14 +13,10 @@ _pwd=`pwd`
 # shellcheck disable=SC2164
 cd "$this_folder"
 
-pip3 --version
-python --version
-python3 --version
-
 curl -XGET https://raw.githubusercontent.com/jtviegas/script-utils/master/bash/aws.sh -o "${this_folder}"/aws.sh
 . "${this_folder}"/aws.sh
 
-aws_init
+aws_init eu-west-1 text
 
 BUCKET="bucket-wrapper-test"
 BUCKET_FOLDER="test"
