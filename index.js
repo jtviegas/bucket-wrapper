@@ -16,7 +16,7 @@ const bucketWrapper = (config) => {
         s3 = new aws.S3({apiVersion: config.AWS_API_VERSION
             , endpoint: config.test.aws_s3_endpoint
             , region: config.AWS_REGION
-            , s3ForcePathStyle: true, accessKeyId: 'foo' , secretAccessKey: 'foo'});
+            , s3ForcePathStyle: true, accessKeyId: process.env.ACCESS_KEY_ID , secretAccessKey: process.env.ACCESS_KEY});
     }
     else
         s3 = new aws.S3({apiVersion: config.AWS_API_VERSION});
