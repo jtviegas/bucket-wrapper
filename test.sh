@@ -8,6 +8,9 @@ echo "this_folder: $this_folder"
 
 parent_folder=$(dirname $this_folder)
 
+AWS_REGION=eu-west-1
+AWS_CLI_OUTPUT_FORMAT=text
+
 # shellcheck disable=SC2006
 _pwd=`pwd`
 # shellcheck disable=SC2164
@@ -16,7 +19,7 @@ cd "$this_folder"
 curl -XGET https://raw.githubusercontent.com/jtviegas/script-utils/master/bash/aws.sh -o "${this_folder}"/aws.sh
 . "${this_folder}"/aws.sh
 
-aws_init eu-west-1 text
+aws_init $AWS_REGION $AWS_CLI_OUTPUT_FORMAT
 
 
 BUCKET="bucket-wrapper-test"

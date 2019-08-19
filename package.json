@@ -1,6 +1,6 @@
 {
   "name": "@jtviegas/bucket-wrapper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "...it's exactly that, a wrapper for a bucket-like store",
   "main": "index.js",
   "engines": {

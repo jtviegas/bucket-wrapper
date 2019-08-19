@@ -11,10 +11,17 @@ BUCKET WRAPPER
   `npm install @jtviegas/bucket-wrapper`
 
 ## Usage
-
-    ```javascript
-    var bw = require('@jtviegas/bucket-wrapper');
-    bw.listObjects = ("bucket", "bucketPrefix", (e,r) => {
+    
+    
+    let config = {
+            WINSTON_CONFIG: { ... }
+            , AWS_REGION: 'eu-west-1'
+            , AWS_API_VERSION: '2006-03-01'
+    }
+    
+    var bw = require('@jtviegas/bucket-wrapper')(config);
+    
+    bw.listObjects = (bucket, bucket_key, (e,r) => {
         if(e){
             //...do your error handling
         }
@@ -22,8 +29,8 @@ BUCKET WRAPPER
         // ... do whatever you want
         }
     });
-    ```
-
+    
+  Check the test folder in source tree.
 ## Tests
 
   `npm test`
