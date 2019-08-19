@@ -18,6 +18,7 @@ curl -XGET https://raw.githubusercontent.com/jtviegas/script-utils/master/bash/a
 
 aws_init eu-west-1 text
 
+
 BUCKET="bucket-wrapper-test"
 BUCKET_FOLDER="test"
 AWS_CONTAINER="http://localhost:5000"
