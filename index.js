@@ -2,24 +2,41 @@
 
 const winston = require('winston');
 const aws = require('aws-sdk');
+const commons = require('@jtviegas/jscommons').commons;
 
 const bucketWrapper = (config) => {
+
+    const AWS_API_VERSION = '2006-03-01';
 
     if (!config)
         throw new Error('!!! must provide config to initialize module !!!');
 
-    const logger = winston.createLogger(config['WINSTON_CONFIG']);
+    const CONFIGURATION_SPEC = {
+        aws_region: 'BUCKETWRAPPER_AWS_REGION'
+        , accessKeyId: 'BUCKETWRAPPER_AWS_ACCESS_KEY_ID'
+        , secretAccessKey: 'BUCKETWRAPPER_AWS_ACCESS_KEY'
+    };
+
+    let configuration = commons.getConfiguration(CONFIGURATION_SPEC, config);
+    configuration.apiVersion = AWS_API_VERSION;
+
+    const logger = winston.createLogger(commons.getDefaultWinstonConfig());
 
     let s3;
-    if( config.test && config.test.aws_s3_endpoint ) {
-        logger.info("[bucketWrapper] using specific url: %s", config.test.aws_s3_endpoint);
-        s3 = new aws.S3({apiVersion: config.AWS_API_VERSION
-            , endpoint: config.test.aws_s3_endpoint
-            , region: config.AWS_REGION
-            , s3ForcePathStyle: true, accessKeyId: process.env.ACCESS_KEY_ID , secretAccessKey: process.env.ACCESS_KEY});
+    if( config.test ) {
+        configuration.test = config.test;
+        logger.info("[bucketWrapper] testing using specific url: %s", configuration.test.aws_s3_endpoint);
+        let testConfig = {apiVersion: configuration.apiVersion
+            , endpoint: configuration.test.aws_s3_endpoint
+            , region: configuration.aws_region
+            , s3ForcePathStyle: true
+            , accessKeyId: configuration.accessKeyId
+            , secretAccessKey: configuration.secretAccessKey};
+        logger.info("test config: %o", testConfig);
+        s3 = new aws.S3(testConfig);
     }
     else
-        s3 = new aws.S3({apiVersion: config.AWS_API_VERSION});
+        s3 = new aws.S3({apiVersion: configuration.apiVersion});
 
     const listObjects = (bucketName, bucketNamePrefix, callback) => {
         logger.debug("[listObjects|in] (%s, %s)", bucketName, bucketNamePrefix);

@@ -1,8 +1,9 @@
 'use strict';
 
+const commons = require('@jtviegas/jscommons').commons;
 const winston = require('winston');
 const config = require("./config");
-const logger = winston.createLogger(config['WINSTON_CONFIG']);
+const logger = winston.createLogger(commons.getDefaultWinstonConfig());
 const index = require('../index')(config);
 const chai = require('chai');
 const expect = chai.expect;

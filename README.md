@@ -4,7 +4,7 @@
 BUCKET WRAPPER
 =========
 
-...it's exactly that, a wrapper library for a bucket-like store
+wrapper library for a bucket-like store, current implementation using aws s3
 
 ## Installation
 
@@ -12,11 +12,17 @@ BUCKET WRAPPER
 
 ## Usage
     
+### required environment variables or configuration properties
+  - BUCKETWRAPPER_AWS_REGION
+  - BUCKETWRAPPER_AWS_ACCESS_KEY_ID
+  - BUCKETWRAPPER_AWS_ACCESS_KEY
+
+### code snippet example
     
     let config = {
-            WINSTON_CONFIG: { ... }
-            , AWS_REGION: 'eu-west-1'
-            , AWS_API_VERSION: '2006-03-01'
+            BUCKETWRAPPER_AWS_REGION: 'eu-west-1'
+            , BUCKETWRAPPER_AWS_ACCESS_KEY_ID: .....
+            , BUCKETWRAPPER_AWS_ACCESS_KEY: .....
     }
     
     var bw = require('@jtviegas/bucket-wrapper')(config);
@@ -31,10 +37,11 @@ BUCKET WRAPPER
     });
     
   Check the test folder in source tree.
+  
 ## Tests
 
-  `npm test`
+    npm test
 
 ## Contributing
 
-In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
+just help yourself and submit a pull request

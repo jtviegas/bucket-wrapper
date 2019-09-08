@@ -46,7 +46,7 @@ info "...added folder $BUCKET_FOLDER to bucket $BUCKET..."
 node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*
 __r=$?
 
-echo "...stopping db container..."
+echo "...stopping aws mock container..."
 docker stop $CONTAINER && docker rm $CONTAINER
 rm "${this_folder}"/aws.sh
 

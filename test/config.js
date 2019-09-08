@@ -5,19 +5,10 @@ const winston = require('winston');
 const config_module = function(){
 
     let config = {
-        WINSTON_CONFIG: {
-            level: 'debug',
-            format: winston.format.combine(
-                winston.format.splat(),
-                winston.format.timestamp(),
-                winston.format.printf(info => {
-                    return `${info.timestamp} ${info.level}: ${info.message}`;
-                })
-            ),
-            transports: [new winston.transports.Console()]
-        }
-        , AWS_REGION: 'eu-west-1'
-        , AWS_API_VERSION: '2006-03-01'
+
+        BUCKETWRAPPER_AWS_REGION: 'eu-west-1'
+        , BUCKETWRAPPER_AWS_ACCESS_KEY_ID: null
+        , BUCKETWRAPPER_AWS_ACCESS_KEY: null
         , test: {
             aws_s3_endpoint: 'http://localhost:5000'
             , bucket: 'bucket-wrapper-test'
