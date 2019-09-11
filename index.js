@@ -23,11 +23,11 @@ const bucketWrapper = (config) => {
     const logger = winston.createLogger(commons.getDefaultWinstonConfig());
 
     let s3;
-    if( config.test ) {
-        configuration.test = config.test;
-        logger.info("[bucketWrapper] testing using specific url: %s", configuration.test.aws_s3_endpoint);
+    if( config.BUCKETWRAPPER_TEST ) {
+        configuration.BUCKETWRAPPER_TEST = config.BUCKETWRAPPER_TEST;
+        logger.info("[bucketWrapper] testing using specific url: %s", configuration.BUCKETWRAPPER_TEST.aws_s3_endpoint);
         let testConfig = {apiVersion: configuration.apiVersion
-            , endpoint: configuration.test.aws_s3_endpoint
+            , endpoint: configuration.BUCKETWRAPPER_TEST.aws_s3_endpoint
             , region: configuration.aws_region
             , s3ForcePathStyle: true
             , accessKeyId: configuration.accessKeyId
