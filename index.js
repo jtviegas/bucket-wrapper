@@ -26,9 +26,9 @@ const bucketWrapper = (config) => {
     let configuration = commons.mergeConfiguration(commons.getConfiguration(CONFIGURATION_SPEC, config), constants)
     let s3;
     if( configuration.BUCKETWRAPPER_TEST ) {
-        logger.info("[bucketWrapper] testing using specific url: %s", configuration.BUCKETWRAPPER_TEST.aws_s3_endpoint);
+        logger.info("[bucketWrapper] testing using specific url: %s", configuration.BUCKETWRAPPER_TEST.bucket_endpoint);
         let testConfig = {apiVersion: configuration.apiVersion
-            , endpoint: configuration.BUCKETWRAPPER_TEST.aws_s3_endpoint
+            , endpoint: configuration.BUCKETWRAPPER_TEST.bucket_endpoint
             , region: configuration.aws_region
             , s3ForcePathStyle: true
             , accessKeyId: configuration.accessKeyId

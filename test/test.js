@@ -7,7 +7,7 @@ const config = {
     , BUCKETWRAPPER_AWS_ACCESS_KEY_ID: process.env.ACCESS_KEY_ID
     , BUCKETWRAPPER_AWS_ACCESS_KEY: process.env.ACCESS_KEY
     , BUCKETWRAPPER_TEST: {
-        aws_s3_endpoint: 'http://localhost:5000'
+        bucket_endpoint: 'http://localhost:5000'
         , bucket: 'bucket-wrapper-test'
         , bucket_folder: 'test'
         , filename: 'a.txt'
