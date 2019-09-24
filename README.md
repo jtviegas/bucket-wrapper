@@ -16,6 +16,7 @@ wrapper library for a bucket-like store, current implementation using aws s3
   - BUCKETWRAPPER_AWS_REGION
   - BUCKETWRAPPER_AWS_ACCESS_KEY_ID
   - BUCKETWRAPPER_AWS_ACCESS_KEY
+  - for testing purposes: BUCKETWRAPPER_TEST: { aws_s3_endpoint: 'http://localhost:5000' }
 
 ### code snippet example
     

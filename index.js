@@ -3,10 +3,13 @@
 const winston = require('winston');
 const aws = require('aws-sdk');
 const commons = require('@jtviegas/jscommons').commons;
+const logger = winston.createLogger(commons.getDefaultWinstonConfig());
 
 const bucketWrapper = (config) => {
 
-    const AWS_API_VERSION = '2006-03-01';
+    const constants = {
+        apiVersion: '2006-03-01'
+    };
 
     if (!config)
         throw new Error('!!! must provide config to initialize module !!!');
@@ -15,16 +18,14 @@ const bucketWrapper = (config) => {
         aws_region: 'BUCKETWRAPPER_AWS_REGION'
         , accessKeyId: 'BUCKETWRAPPER_AWS_ACCESS_KEY_ID'
         , secretAccessKey: 'BUCKETWRAPPER_AWS_ACCESS_KEY'
+        // testing purposes
+        , BUCKETWRAPPER_TEST: 'BUCKETWRAPPER_TEST'
+
     };
 
-    let configuration = commons.getConfiguration(CONFIGURATION_SPEC, config);
-    configuration.apiVersion = AWS_API_VERSION;
-
-    const logger = winston.createLogger(commons.getDefaultWinstonConfig());
-
+    let configuration = commons.mergeConfiguration(commons.getConfiguration(CONFIGURATION_SPEC, config), constants)
     let s3;
-    if( config.BUCKETWRAPPER_TEST ) {
-        configuration.BUCKETWRAPPER_TEST = config.BUCKETWRAPPER_TEST;
+    if( configuration.BUCKETWRAPPER_TEST ) {
         logger.info("[bucketWrapper] testing using specific url: %s", configuration.BUCKETWRAPPER_TEST.aws_s3_endpoint);
         let testConfig = {apiVersion: configuration.apiVersion
             , endpoint: configuration.BUCKETWRAPPER_TEST.aws_s3_endpoint

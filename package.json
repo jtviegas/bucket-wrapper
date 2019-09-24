@@ -1,6 +1,6 @@
 {
   "name": "@jtviegas/bucket-wrapper",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "wrapper library for a bucket-like store, current implementation using aws s3",
   "main": "index.js",
   "engines": {
@@ -32,7 +32,7 @@
     "mocha": "^6.2.0"
   },
   "dependencies": {
-    "@jtviegas/jscommons": "0.0.10",
+    "@jtviegas/jscommons": "latest",
     "aws-sdk": "^2.510.0",
     "winston": "^3.2.1"
   }
