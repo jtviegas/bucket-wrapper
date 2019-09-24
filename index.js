@@ -33,17 +33,17 @@ const bucketWrapper = (config) => {
             , s3ForcePathStyle: true
             , accessKeyId: configuration.accessKeyId
             , secretAccessKey: configuration.secretAccessKey};
-        logger.info("test config: %o", testConfig);
+        logger.info("[bucketWrapper] test config: %o", testConfig);
         s3 = new aws.S3(testConfig);
     }
     else
         s3 = new aws.S3({apiVersion: configuration.apiVersion});
 
     const listObjects = (bucketName, bucketNamePrefix, callback) => {
-        logger.debug("[listObjects|in] (%s, %s)", bucketName, bucketNamePrefix);
+        logger.debug("[bucketWrapper|listObjects|in] (%s, %s)", bucketName, bucketNamePrefix);
         try{
             s3.listObjectsV2({ Bucket: bucketName, Prefix: bucketNamePrefix + '/' }, function(e, d) {
-                logger.debug("[s3.listObjectsV2|in] (%o,%o)", e, d);
+                logger.debug("[bucketWrapper|s3.listObjectsV2|in] (%o,%o)", e, d);
                 if (e){
                     logger.error(e);
                     callback(e);
@@ -57,11 +57,11 @@ const bucketWrapper = (config) => {
             callback(e);
         }
 
-        logger.debug("[listObjects|out]");
+        logger.debug("[bucketWrapper|listObjects|out]");
     };
 
     const createObject = (bucket, key, binaryString, callback) => {
-        logger.debug("[createObject|in] (%s, %s, <binaryString>)", bucket, key);
+        logger.debug("[bucketWrapper|createObject|in] (%s, %s, ---binaryString---)", bucket, key);
         try{
             let params = {
                 Body: binaryString,
@@ -69,7 +69,7 @@ const bucketWrapper = (config) => {
                 Key: key
             };
             s3.putObject(params, function(e, r) {
-                logger.debug("[s3.putObject|in] (%o,%o)", e, r);
+                logger.debug("[bucketWrapper|s3.putObject|in] (%o,%o)", e, r);
                 if (e){
                     logger.error(e);
                     callback(e);
@@ -83,11 +83,11 @@ const bucketWrapper = (config) => {
             callback(e);
         }
 
-        logger.debug("[createObject|out]");
+        logger.debug("[bucketWrapper|createObject|out]");
     };
 
     const deleteObjects = (bucket, keys, callback) => {
-        logger.debug("[deleteObjects|in] (%s, %o)", bucket, keys);
+        logger.debug("[bucketWrapper|deleteObjects|in] (%s, %o)", bucket, keys);
 
         let _keys = [];
         if( Array.isArray(keys) ){
@@ -108,7 +108,7 @@ const bucketWrapper = (config) => {
                 }
             };
             s3.deleteObjects(params, function(e, r) {
-                logger.debug("[s3.deleteObjects|in] (%o,%o)", e, r);
+                logger.debug("[bucketWrapper|s3.deleteObjects|in] (%o,%o)", e, r);
                 if (e){
                     logger.error(e);
                     callback(e);
@@ -121,18 +121,18 @@ const bucketWrapper = (config) => {
             logger.error(e);
             callback(e);
         }
-        logger.debug("[deleteObjects|out]");
+        logger.debug("[bucketWrapper|deleteObjects|out]");
     };
 
     const getObject = (bucket, key, callback) => {
-        logger.debug("[getObject|in] (%s, %s)", bucket, key);
+        logger.debug("[bucketWrapper|getObject|in] (%s, %s)", bucket, key);
         try{
             let params = {
                 Bucket: bucket,
                 Key: key
             };
             s3.getObject(params, function(e, r) {
-                logger.debug("[s3.getObject|in] (%o,%o)", e, r);
+                logger.debug("[bucketWrapper|s3.getObject|in] (%o,%o)", e, r);
                 if (e){
                     logger.error(e);
                     callback(e);
@@ -146,7 +146,7 @@ const bucketWrapper = (config) => {
             callback(e);
         }
 
-        logger.debug("[getObject|out]");
+        logger.debug("[bucketWrapper|getObject|out]");
     };
 
     return {listObjects: listObjects
