@@ -42,7 +42,13 @@ const bucketWrapper = (config) => {
     const listObjects = (bucketName, bucketNamePrefix, callback) => {
         logger.debug("[bucketWrapper|listObjects|in] (%s, %s)", bucketName, bucketNamePrefix);
         try{
-            s3.listObjectsV2({ Bucket: bucketName, Prefix: bucketNamePrefix + '/' }, function(e, d) {
+            let params = {};
+            if( bucketNamePrefix && 0 < bucketNamePrefix.length )
+                params = { Bucket: bucketName, Prefix: bucketNamePrefix + '/' };
+            else
+                params = { Bucket: bucketName };
+
+            s3.listObjectsV2(params, function(e, d) {
                 logger.debug("[bucketWrapper|s3.listObjectsV2|in] (%o,%o)", e, d);
                 if (e){
                     logger.error(e);
@@ -148,6 +154,7 @@ const bucketWrapper = (config) => {
 
         logger.debug("[bucketWrapper|getObject|out]");
     };
+
 
     return {listObjects: listObjects
     , createObject: createObject
