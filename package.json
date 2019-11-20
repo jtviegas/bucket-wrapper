@@ -1,6 +1,6 @@
 {
   "name": "@jtviegas/bucket-wrapper",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "wrapper library for a bucket-like store, current implementation using aws s3",
   "main": "index.js",
   "engines": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "./test.sh",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "cover": "node_modules/nyc/bin/nyc.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "repository": {
     "type": "git",
@@ -27,13 +27,13 @@
   "homepage": "https://github.com/jtviegas/bucket-wrapper#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "coveralls": "^3.0.6",
-    "istanbul": "^0.4.5",
-    "mocha": "^6.2.0"
+    "coveralls": "^3.0.7",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
   },
   "dependencies": {
-    "@jtviegas/jscommons": "latest",
-    "aws-sdk": "^2.510.0",
+    "@jtviegas/jscommons": "0.0.25",
+    "aws-sdk": "^2.575.0",
     "winston": "^3.2.1"
   }
 }

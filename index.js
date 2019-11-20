@@ -5,34 +5,24 @@ const aws = require('aws-sdk');
 const commons = require('@jtviegas/jscommons').commons;
 const logger = winston.createLogger(commons.getDefaultWinstonConfig());
 
-const bucketWrapper = (config) => {
+const bucketWrapper = function () {
 
-    const constants = {
-        apiVersion: '2006-03-01'
-    };
+    logger.info("[bucketWrapper] initializing...");
 
-    if (!config)
-        throw new Error('!!! must provide config to initialize module !!!');
 
-    const CONFIGURATION_SPEC = {
-        aws_region: 'BUCKETWRAPPER_AWS_REGION'
-        , accessKeyId: 'BUCKETWRAPPER_AWS_ACCESS_KEY_ID'
-        , secretAccessKey: 'BUCKETWRAPPER_AWS_ACCESS_KEY'
-        // testing purposes
-        , BUCKETWRAPPER_TEST: 'BUCKETWRAPPER_TEST'
+    const CONSTANTS = {  apiVersion: '2006-03-01' , region: 'eu-west-1'  };
+    const CONFIGURATION_SPEC = [ 'region', 'AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'BUCKETWRAPPER_TEST_ENDPOINT' ];
+    let configuration = commons.mergeConfiguration(CONSTANTS, commons.getEnvironmentVarsSubset(CONFIGURATION_SPEC));
 
-    };
-
-    let configuration = commons.mergeConfiguration(commons.getConfiguration(CONFIGURATION_SPEC, config), constants)
     let s3;
-    if( configuration.BUCKETWRAPPER_TEST ) {
-        logger.info("[bucketWrapper] testing using specific url: %s", configuration.BUCKETWRAPPER_TEST.bucket_endpoint);
+    if( configuration.BUCKETWRAPPER_TEST_ENDPOINT ) {
+        logger.info("[bucketWrapper] testing using specific url: %s", configuration.BUCKETWRAPPER_TEST_ENDPOINT);
         let testConfig = {apiVersion: configuration.apiVersion
-            , endpoint: configuration.BUCKETWRAPPER_TEST.bucket_endpoint
-            , region: configuration.aws_region
+            , endpoint: configuration.BUCKETWRAPPER_TEST_ENDPOINT
+            , region: configuration.region
             , s3ForcePathStyle: true
-            , accessKeyId: configuration.accessKeyId
-            , secretAccessKey: configuration.secretAccessKey};
+            , accessKeyId: configuration.AWS_ACCESS_KEY_ID
+            , secretAccessKey: configuration.AWS_SECRET_ACCESS_KEY};
         logger.info("[bucketWrapper] test config: %o", testConfig);
         s3 = new aws.S3(testConfig);
     }
@@ -160,6 +150,6 @@ const bucketWrapper = (config) => {
     , createObject: createObject
     , deleteObjects: deleteObjects
     , getObject: getObject};
-};
+}();
 
 module.exports = bucketWrapper;

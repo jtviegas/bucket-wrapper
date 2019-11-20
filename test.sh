@@ -42,8 +42,8 @@ createFolderInBucket ${BUCKET} ${BUCKET_FOLDER} ${AWS_CONTAINER}
 __r=$?
 if [ ! "$__r" -eq "0" ] ; then cd "${_pwd}" && exit 1; fi
 info "...added folder $BUCKET_FOLDER to bucket $BUCKET..."
-
-node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*
+export BUCKETWRAPPER_TEST_ENDPOINT="$AWS_CONTAINER"
+node_modules/nyc/bin/nyc.js node_modules/mocha/bin/_mocha -- -R spec test/*
 __r=$?
 
 echo "...stopping aws mock container..."
