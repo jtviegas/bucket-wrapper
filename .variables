@@ -1,0 +1,5 @@
+export STACK_IMAGE="localstack/localstack"
+export STACK_NAME="localaws"
+export TEST_BUCKET="testbucket"
+
+NPM_REGISTRY=registry.npmjs.org

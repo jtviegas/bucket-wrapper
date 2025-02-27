@@ -1,0 +1,23 @@
+name: build, test & eventually publish
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - run: npm install jest@^29.7.0 --global
+    - run: npm install
+    - run: ./helper.sh test
+    - name: check coverage
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    - run: npm run-script publicate
+      if: ${{ startsWith(github.ref_name, 'release_') }}
+      env:
+        NPM_TOKEN: ${{secrets.NPM_TOKEN}}
