@@ -2,4 +2,6 @@ export STACK_IMAGE="localstack/localstack"
 export STACK_NAME="localaws"
 export TEST_BUCKET="testbucket"
 
-NPM_REGISTRY=registry.npmjs.org
+export NPM_REGISTRY=registry.npmjs.org
+export AWS_ACCESS_KEY_ID=test
+export AWS_REGION=eu-north-1
