@@ -1,6 +1,6 @@
 {
   "name": "@jtviegas/bucket-wrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wrapper library for a bucket-like store, current implementation using aws s3",
   "main": "index.js",
   "engines": {
