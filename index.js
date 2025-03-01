@@ -11,18 +11,18 @@ class BucketWrapperError extends Error {
 
 class BucketWrapper {
 
-    constructor(config) {
+    constructor(config=undefined) {
         this.client = new S3Client(config);
-        this.listLimit = config.listLimit || 512 
+        this.listLimit = config ? config.listLimit || 512 : 512; 
     }
 
-    async putObject(bucket, key, body) {
+    async putObject(bucket, key, body, contentType='application/octet-stream') {
         console.info("[BucketWrapper|putObject|in] (%s, %s, ---obj---)", bucket, key);
         const input = { 
             "Bucket": bucket, 
             "Body": body, 
             "Key": key,
-            "ContentType": 'application/octet-stream'
+            "ContentType": contentType
         };
         try {
             const command = new PutObjectCommand(input);
